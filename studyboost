@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STUDYBOOST — Focus Café</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.10);
+      --text:#eef4ff;
+      --muted:#aab6d6;
+      --accent:#7c3aed;   /* purple */
+      --accent2:#22c55e;  /* green */
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --r: 18px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(850px 550px at 90% 10%, rgba(34,197,94,.18), transparent 55%),
+        var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:22px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.4px}
+    .logo{
+      width:36px;height:36px;border-radius:14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 18px 45px rgba(124,58,237,.25);
+    }
+    .links{display:flex; gap:14px; color:var(--muted); font-weight:650}
+    .links a{padding:8px 10px; border-radius:12px}
+    .links a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .btn{
+      padding:12px 16px; border-radius:14px; cursor:pointer;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:850;
+      transition:.2s;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.10)}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--accent), #ff4fd8);
+      box-shadow: 0 18px 60px rgba(124,58,237,.25);
+    }
+    .card{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:12px;
+      align-items:stretch;
+    }
+    .heroL{padding:34px}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px; border-radius:999px;
+      background: rgba(34,197,94,.10);
+      border:1px solid rgba(34,197,94,.20);
+      color:#d6ffe6;
+      font-weight:800;
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height:1.05;
+      letter-spacing:-.9px;
+    }
+    .sub{color:var(--muted); line-height:1.7; font-size:16px; max-width:58ch}
+    .ctas{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .stats{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:22px}
+    .stat{padding:14px; border-radius:16px; background:rgba(255,255,255,.05); border:1px solid var(--border)}
+    .stat b{font-size:18px}
+    .stat span{display:block; margin-top:4px; color:var(--muted); font-size:13px}
+
+    .heroR{padding:16px; display:flex; flex-direction:column; gap:10px}
+    .mock{
+      flex:1; min-height:270px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:
+        radial-gradient(260px 220px at 50% 35%, rgba(255,79,216,.18), transparent 60%),
+        radial-gradient(320px 240px at 55% 70%, rgba(34,197,94,.18), transparent 60%),
+        rgba(255,255,255,.03);
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .poster{
+      width:82%;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
+      padding:18px;
+      transform: rotate(-2deg);
+      box-shadow: 0 30px 90px rgba(0,0,0,.55);
+    }
+    .poster h3{margin:0 0 8px; font-size:18px}
+    .poster p{margin:0; color:var(--muted); line-height:1.6}
+    .mini{padding:14px; border-radius:16px; border:1px solid var(--border); background:rgba(255,255,255,.04)}
+    .mini b{display:block}
+    .mini span{color:var(--muted); font-size:13px}
+
+    section{margin-top:20px}
+    .grid3{display:grid; grid-template-columns: repeat(3,1fr); gap:12px}
+    .feat{padding:18px}
+    .feat h3{margin:8px 0 6px}
+    .feat p{margin:0; color:var(--muted); line-height:1.6}
+
+    .pricing{display:grid; grid-template-columns: repeat(3,1fr); gap:12px}
+    .pCard{padding:18px}
+    .tag{
+      display:inline-block;
+      padding:6px 10px; border-radius:999px;
+      font-size:12px; font-weight:900;
+      background: rgba(124,58,237,.14);
+      border:1px solid rgba(124,58,237,.25);
+    }
+    .price{font-size:34px; font-weight:950; margin:12px 0 4px}
+    .small{color:var(--muted)}
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.7}
+
+    .faq{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    details{padding:16px; border-radius:16px; border:1px solid var(--border); background:rgba(255,255,255,.04)}
+    summary{cursor:pointer; font-weight:900}
+    details p{margin:10px 0 0; color:var(--muted); line-height:1.6}
+
+    .footer{margin:24px 0 10px; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid3,.pricing{grid-template-columns:1fr}
+      .faq{grid-template-columns:1fr}
+      .links{display:none}
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand"><div class="logo"></div> STUDYBOOST</div>
+      <div class="links">
+        <a href="#why">რატომ?</a>
+        <a href="#packs">პაკეტები</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">კონტაქტი</a>
+      </div>
+      <button class="btn primary" onclick="scrollTo('packs')">ბრონირება</button>
+    </div>
+
+    <div class="hero">
+      <div class="card heroL">
+        <div class="pill">☕ Wi-Fi • Focus Room • Study Vibe</div>
+        <h1>სწავლა ისე, რომ<br/>ტვინი არ “დაიწვას”.</h1>
+        <p class="sub">
+          STUDYBOOST არის კაფე-სივრცე, სადაც შეგიძლია სწავლა/მუშაობა ჩუმად,
+          კომფორტულად და “ზედმეტი ხმაურის გარეშე”.
+          მოდიხარ, ირჩევ პაკეტს და შედიხარ რეჟიმში.
+        </p>
+
+        <div class="ctas">
+          <button class="btn primary" onclick="scrollTo('packs')">პაკეტების ნახვა</button>
+          <button class="btn" onclick="scrollTo('why')">როგორ მუშაობს</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>Focus Room</b><span>ჩუმი ზონა</span></div>
+          <div class="stat"><b>Fast Wi-Fi</b><span>სწრაფი ინტერნეტი</span></div>
+          <div class="stat"><b>Study Bundles</b><span>ყავა + დრო</span></div>
+        </div>
+      </div>
+
+      <div class="card heroR">
+        <div class="mock">
+          <div class="poster">
+            <h3>დღის შეთავაზება 🎯</h3>
+            <p>“2 საათი Focus Room + ლატე” — სტუდენტური ფასი დღეს.</p>
+          </div>
+        </div>
+        <div class="mini">
+          <b>ბრონირება 10 წამში</b>
+          <span>დააჭირე “ბრონირებას” და დაგიკავშირდებით DM-ში.</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="why">
+      <h2>რატომ STUDYBOOST?</h2>
+      <div class="grid3">
+        <div class="card feat">
+          <h3>🔇 ნაკლები ხმაური</h3>
+          <p>როდესაც გარემო მშვიდია, კონცენტრაცია ავტომატურად იზრდება.</p>
+        </div>
+        <div class="card feat">
+          <h3>🧠 “რეჟიმის” ატმოსფერო</h3>
+          <p>აქ მოდიხარ კონკრეტული მიზნით — და ეს გეხმარება არ გაფანტო ყურადღება.</p>
+        </div>
+        <div class="card feat">
+          <h3>📸 Content-friendly</h3>
+          <p>სუფთა, თანამედროვე სივრცე — Reels/TikTok-სთვის იდეალური.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="packs">
+      <h2>პაკეტები</h2>
+      <div class="pricing">
+        <div class="card pCard">
+          <span class="tag">Quick Boost</span>
+          <div class="price">₾6</div>
+          <div class="small">1 საათი + ამერიკანო</div>
+          <ul>
+            <li>Wi-Fi</li>
+            <li>სუფთა სამუშაო მაგიდა</li>
+            <li>ჩუმი გარემო</li>
+          </ul>
+          <div style="margin-top:14px">
+            <button class="btn primary" onclick="reserve('Quick Boost')">ბრონირება</button>
+          </div>
+        </div>
+
+        <div class="card pCard">
+          <span class="tag">Focus Mode</span>
+          <div class="price">₾12</div>
+          <div class="small">2 საათი Focus Room + ლატე</div>
+          <ul>
+            <li>Focus Room</li>
+            <li>1 სასმელი</li>
+            <li>სნექზე -10%</li>
+          </ul>
+          <div style="margin-top:14px">
+            <button class="btn primary" onclick="reserve('Focus Mode')">ბრონირება</button>
+          </div>
+        </div>
+
+        <div class="card pCard">
+          <span class="tag">Team Session</span>
+          <div class="price">₾25</div>
+          <div class="small">4 ადამიანი • 2 საათი • დიდი მაგიდა</div>
+          <ul>
+            <li>Group table</li>
+            <li>Wi-Fi + დამტენები</li>
+            <li>საერთო ყავა -20%</li>
+          </ul>
+          <div style="margin-top:14px">
+            <button class="btn primary" onclick="reserve('Team Session')">ბრონირება</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details class="card">
+          <summary>როგორ ვბრონავ?</summary>
+          <p>დააჭირე “ბრონირება”-ს და დაგიწერს მოკლე შეტყობინებას (დემო). რეალში იქნება DM/ფორმა.</p>
+        </details>
+        <details class="card">
+          <summary>Focus Room რამდენად ჩუმია?</summary>
+          <p>კონცეფცია არის “quiet zone” — საუბარი მინიმუმამდე, ზარი — გარეთ.</p>
+        </details>
+        <details class="card">
+          <summary>სტუდენტური ფასები არის?</summary>
+          <p>დიახ, პაკეტები განკუთვნილია სტუდენტებისთვისაც — მარტივი და ხელმისაწვდომი.</p>
+        </details>
+        <details class="card">
+          <summary>სად მდებარეობს?</summary>
+          <p>დემოში შეგიძლიათ ჩაწეროთ: “თბილისი” ან თქვენი რაიონი (სერვერზე ატვირთვის შემდეგ).</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>კონტაქტი</h2>
+      <div class="card" style="padding:18px">
+        <p style="margin-top:0;color:var(--muted);line-height:1.6">
+          ბრონირებისთვის: Instagram DM / ტელეფონი.
+        </p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn" href="#" onclick="copyText('@studyboost.ge'); return false;">Facebook: @studyboost.ge</a>
+          <a class="btn" href="#" onclick="copyText('+995 5XX XX XX XX'); return false;">Tel: +995 574 15 28 20</a>
+          <button class="btn primary" onclick="scrollTo('packs')">ბრონირება</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>© <span id="y"></span> STUDYBOOST</div>
+      <div>One-page landing • Final project</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    function scrollTo(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    function reserve(pack){
+      alert("არჩეულია: " + pack + "\\nდემო ვერსიაა — რეალურ საიტზე აქ იქნება ფორმა/DM ბოტი.");
+      scrollTo("contact");
+    }
+
+    async function copyText(text){
+      try{ await navigator.clipboard.writeText(text); alert("კოპირებულია: " + text); }
+      catch(e){ prompt("კოპირება ვერ მოხერხდა. დააკოპირე ხელით:", text); }
+    }
+  </script>
+</body>
+</html>
+
+
